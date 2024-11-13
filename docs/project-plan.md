@@ -24,14 +24,31 @@ graph TD
     E --> F[Quality Assessment]
     
     subgraph "Parallel Quality Checks"
-        F --> F1[SOLID Analysis]
-        F --> F2[Architecture Analysis]
-        F --> F3[Maintainability Analysis]
-        F --> F4[Testing Analysis]
+        F --> F1[Load Analysis Prompts]
+        F1 --> F2[Run Configured Analyses]
     end
     
-    F1 & F2 & F3 & F4 --> G[Report Generation]
+    F2 --> G[Report Generation]
 ```
+
+### Configurable Analysis System
+
+The system uses configuration over code to define what to analyze and how to analyze it. This allows for:
+
+1. Flexible Analysis Definition
+   - Analysis criteria defined in configuration files
+   - Easy to add, remove, or modify analysis types
+   - No code changes needed to update analysis criteria
+
+2. Configurable Components
+   - Evaluation criteria
+   - Analysis prompts
+
+3. Benefits
+   - Easy customization per project
+   - Reusable analysis patterns
+   - Consistent evaluation approach
+   - Simple maintenance and updates
 
 ### Workflow Implementation
 
@@ -48,6 +65,7 @@ class AnalysisState(TypedDict):
     reports: dict
     cache: dict
     messages: List[str]
+    prompt_configs: Dict[str, Any]
 ```
 
 #### 2. Parallel Execution Nodes
@@ -69,17 +87,6 @@ class AnalysisState(TypedDict):
        """Deep analysis of single component"""
    ```
 
-3. Quality Assessment (parallel per category):
-   ```python
-   @node
-   def assess_solid_principles(state: AnalysisState) -> dict:
-       """Evaluate SOLID compliance"""
-   
-   @node
-   def assess_architecture(state: AnalysisState) -> dict:
-       """Evaluate architectural patterns"""
-   ```
-
 #### 3. Sequential Nodes
 ```python
 @node
@@ -89,42 +96,6 @@ def analyze_integration(state: AnalysisState) -> dict:
 @node
 def generate_reports(state: AnalysisState) -> dict:
     """Generate final reports"""
-```
-
-#### 4. Workflow Configuration
-```python
-def create_analysis_workflow():
-    """Creates parallel analysis workflow"""
-    workflow = StateGraph(AnalysisState)
-    
-    # Add parallel initial analysis
-    workflow.add_parallel_nodes(
-        "initial_analysis",
-        ["analyze_structure", "discover_components"]
-    )
-    
-    # Add dynamic parallel component analysis
-    workflow.add_parallel_by_map(
-        "component_analysis",
-        analyze_component,
-        lambda state: state["component_map"]
-    )
-    
-    # Add parallel quality assessment
-    workflow.add_parallel_nodes(
-        "quality_assessment",
-        ["assess_solid", "assess_architecture", 
-         "assess_maintainability", "assess_testing"]
-    )
-    
-    # Configure edges
-    workflow.set_entry_point("initial_analysis")
-    workflow.add_edge("initial_analysis", "component_analysis")
-    workflow.add_edge("component_analysis", "analyze_integration")
-    workflow.add_edge("analyze_integration", "quality_assessment")
-    workflow.add_edge("quality_assessment", "generate_reports")
-    
-    return workflow.compile()
 ```
 
 ### Rate Limit Management
@@ -138,6 +109,7 @@ def create_analysis_workflow():
    - Project structure
    - Component definitions
    - Analysis results
+   - Analysis prompt results
    
 2. Memory Cache:
    - Intermediate results
@@ -149,7 +121,10 @@ def create_analysis_workflow():
 [x] Create basic repository indexer
 [x] Create basic workflow system
 [x] Create basic report generation
-[ ] Implement parallel analysis nodes
+[ ] Design configurable analysis system
+[ ] Implement analysis configuration loading
+[ ] Create dynamic analysis execution
+[ ] Implement parallel analysis execution
 [ ] Create state management system
 [ ] Add rate limit handling
 [ ] Create caching system
@@ -170,3 +145,8 @@ def create_analysis_workflow():
 3. Granular progress tracking
 4. Reusable cached insights
 5. Scalable to different project sizes
+6. Configurable analysis criteria
+7. Easy to add/remove analysis principles
+8. Maintainable through configuration over code
+9. Flexible prompt customization
+10. Project-specific analysis tuning
