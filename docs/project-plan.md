@@ -118,26 +118,26 @@ def generate_reports(state: AnalysisState) -> dict:
 
 ## Execution Steps
 
-[x] Create basic repository indexer
-[x] Create basic workflow system
-[x] Create basic report generation
-[ ] Design configurable analysis system
-[ ] Implement analysis configuration loading
-[ ] Create dynamic analysis execution
-[ ] Implement parallel analysis execution
-[ ] Create state management system
-[ ] Add rate limit handling
-[ ] Create caching system
-[ ] Improve code parsing
-[ ] Add relationship tracking
-[ ] Implement quality metrics
-[ ] Add progress tracking
-[ ] Create overview report with diagrams
-[ ] Create detailed assessment report
-[ ] Add recommendations generation
-[ ] Implement basic Streamlit interface
-[ ] Add query system for cached insights
-[ ] Create interactive exploration UI
+- [x] Create basic repository indexer
+- [x] Create basic workflow system
+- [x] Create basic report generation
+- [ ] Design configurable analysis system
+- [ ] Implement analysis configuration loading
+- [ ] Create dynamic analysis execution
+- [ ] Implement parallel analysis execution
+- [ ] Create state management system
+- [ ] Add rate limit handling
+- [ ] Create caching system
+- [ ] Improve code parsing
+- [ ] Add relationship tracking
+- [ ] Implement quality metrics
+- [ ] Add progress tracking
+- [ ] Create overview report with diagrams
+- [ ] Create detailed assessment report
+- [ ] Add recommendations generation
+- [ ] Implement basic Streamlit interface
+- [ ] Add query system for cached insights
+- [ ] Create interactive exploration UI
 
 ## Benefits of This Design
 1. Efficient use of API calls through parallelization
