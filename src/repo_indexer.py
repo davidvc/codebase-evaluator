@@ -3,27 +3,41 @@ import tempfile
 from git import Repo
 import chromadb
 from typing import List, Dict
-import glob
 import datetime
 import shutil
 import logging
+from langchain_openai import OpenAIEmbeddings
+import re
+
+class OpenAIEmbeddingFunction:
+    """Wrapper class to make OpenAIEmbeddings compatible with ChromaDB's interface."""
+    def __init__(self):
+        self._embeddings = OpenAIEmbeddings()
+        
+    def __call__(self, input: List[str]) -> List[List[float]]:
+        """Generate embeddings for a list of texts."""
+        return self._embeddings.embed_documents(input)
 
 class RepoIndexer:
     def __init__(self, persist_directory: str = "./chroma_db"):
         """Initialize RepoIndexer with persistent storage."""
         # Get absolute path and current working directory
         cwd = os.getcwd()
-        persist_directory = os.path.abspath(persist_directory)
+        self.persist_directory = os.path.abspath(persist_directory)
         
         logging.info("\n=== ChromaDB Initialization ===")
         logging.info(f"Current working directory: {cwd}")
         logging.info(f"Database directory (relative): {persist_directory}")
         logging.info(f"Database directory (absolute): {os.path.abspath(persist_directory)}")
         
+        # Create embedding function
+        self.embedding_function = OpenAIEmbeddingFunction()
+        
         self.client = chromadb.PersistentClient(path=persist_directory)
         self.collection = self.client.get_or_create_collection(
             name="code_chunks",
-            metadata={"hnsw:space": "cosine"}
+            metadata={"hnsw:space": "cosine"},
+            embedding_function=self.embedding_function
         )
         
         # Verify database directory exists and show contents
@@ -55,6 +69,36 @@ class RepoIndexer:
         except Exception as e:
             logging.error(f"Error reading file {file_path}: {e}")
             return ""
+
+    def chunk_content(self, content: str, file_path: str) -> List[Dict]:
+        """Split content into smaller, meaningful chunks."""
+        chunks = []
+        
+        # Handle different file types appropriately
+        if file_path.endswith(('.py', '.java', '.js', '.ts', '.cpp', '.cs')):
+            # Split by class/function definitions while preserving context
+            # Basic splitting on common code block markers
+            blocks = re.split(r'(?=\n(?:class|def|function|interface|public|private)\s+)', content)
+            
+            for i, block in enumerate(blocks):
+                if len(block.strip()) > 0:
+                    chunks.append({
+                        'content': block.strip(),
+                        'chunk_type': 'code_block',
+                        'sequence': i
+                    })
+        else:
+            # For other files, use simpler paragraph-based chunking
+            paragraphs = content.split('\n\n')
+            for i, para in enumerate(paragraphs):
+                if len(para.strip()) > 0:
+                    chunks.append({
+                        'content': para.strip(),
+                        'chunk_type': 'text_block',
+                        'sequence': i
+                    })
+        
+        return chunks
 
     def index_repo(self, repo_url: str):
         """Index a GitHub repository into ChromaDB."""
@@ -94,15 +138,22 @@ class RepoIndexer:
                     content = self.read_file_content(file_path)
                     if content:
                         try:
-                            self.collection.add(
-                                documents=[content],
-                                metadatas=[{
-                                    "file_path": relative_path,
-                                    "repo_url": repo_url,
-                                    "indexed_at": str(datetime.datetime.now())
-                                }],
-                                ids=[f"{repo_url}_{relative_path}"]
-                            )
+                            # Split content into chunks
+                            chunks = self.chunk_content(content, file_path)
+                            
+                            for chunk in chunks:
+                                self.collection.add(
+                                    documents=[chunk['content']],
+                                    metadatas=[{
+                                        "file_path": relative_path,
+                                        "repo_url": repo_url,
+                                        "indexed_at": str(datetime.datetime.now()),
+                                        "chunk_type": chunk['chunk_type'],
+                                        "sequence": chunk['sequence']
+                                    }],
+                                    ids=[f"{repo_url}_{relative_path}_{chunk['sequence']}"]
+                                )
+                            
                             files_processed += 1
                             logging.debug(f"Successfully indexed: {relative_path}")
                             
@@ -117,7 +168,7 @@ class RepoIndexer:
             logging.info(f"New files indexed: {files_processed}")
             logging.info(f"Files already indexed: {files_skipped}")
             logging.info(f"Total files encountered: {files_processed + files_skipped}")
-            logging.info(f"Database location: {os.path.abspath(self.client._settings.persist_directory)}")
+            logging.info(f"Database location: {self.persist_directory}")
             
         finally:
             logging.debug(f"\nCleaning up temporary directory: {repo_path}")
