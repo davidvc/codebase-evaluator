@@ -1,0 +1,176 @@
+[{
+  "url": "https://www.softwareimprovementgroup.com/publications/ebook-building-maintainable-software/",
+  "crawl": {
+    "loadedUrl": "https://www.softwareimprovementgroup.com/publications/ebook-building-maintainable-software/",
+    "loadedTime": "2024-11-13T03:59:11.972Z",
+    "referrerUrl": "https://www.softwareimprovementgroup.com/publications/ebook-building-maintainable-software/",
+    "depth": 0,
+    "httpStatusCode": 200
+  },
+  "metadata": {
+    "canonicalUrl": "https://www.softwareimprovementgroup.com/publications/ebook-building-maintainable-software/",
+    "title": "\n\t\t\tBuilding Maintainable Software - SIG\t\t",
+    "description": "Learn 10 easy-to-follow guidelines for delivering Java software that’s easy to maintain and adapt written by consultants from SIG.",
+    "author": null,
+    "keywords": null,
+    "languageCode": "en-US",
+    "openGraph": [
+      {
+        "property": "og:locale",
+        "content": "en_US"
+      },
+      {
+        "property": "og:type",
+        "content": "article"
+      },
+      {
+        "property": "og:title",
+        "content": "Building Maintainable Software - SIG"
+      },
+      {
+        "property": "og:description",
+        "content": "Learn 10 easy-to-follow guidelines for delivering Java software that’s easy to maintain and adapt written by consultants from SIG."
+      },
+      {
+        "property": "og:url",
+        "content": "https://www.softwareimprovementgroup.com/publications/ebook-building-maintainable-software/"
+      },
+      {
+        "property": "og:site_name",
+        "content": "SIG"
+      },
+      {
+        "property": "article:modified_time",
+        "content": "2024-11-05T08:42:46+00:00"
+      },
+      {
+        "property": "og:image",
+        "content": "https://www.softwareimprovementgroup.com/wp-content/uploads/2023/05/Building-Maintainable-Software-mockup.png"
+      },
+      {
+        "property": "og:image:width",
+        "content": "1000"
+      },
+      {
+        "property": "og:image:height",
+        "content": "667"
+      },
+      {
+        "property": "og:image:type",
+        "content": "image/png"
+      }
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://www.softwareimprovementgroup.com/publications/ebook-building-maintainable-software/",
+            "url": "https://www.softwareimprovementgroup.com/publications/ebook-building-maintainable-software/",
+            "name": "Building Maintainable Software - SIG",
+            "isPartOf": {
+              "@id": "https://www.softwareimprovementgroup.com/#website"
+            },
+            "primaryImageOfPage": {
+              "@id": "https://www.softwareimprovementgroup.com/publications/ebook-building-maintainable-software/#primaryimage"
+            },
+            "image": {
+              "@id": "https://www.softwareimprovementgroup.com/publications/ebook-building-maintainable-software/#primaryimage"
+            },
+            "thumbnailUrl": "https://www.softwareimprovementgroup.com/wp-content/uploads/2023/05/Building-Maintainable-Software-mockup.png",
+            "datePublished": "2015-02-08T13:46:50+00:00",
+            "dateModified": "2024-11-05T08:42:46+00:00",
+            "description": "Learn 10 easy-to-follow guidelines for delivering Java software that’s easy to maintain and adapt written by consultants from SIG.",
+            "inLanguage": "en-US",
+            "potentialAction": [
+              {
+                "@type": "ReadAction",
+                "target": [
+                  "https://www.softwareimprovementgroup.com/publications/ebook-building-maintainable-software/"
+                ]
+              }
+            ]
+          },
+          {
+            "@type": "ImageObject",
+            "inLanguage": "en-US",
+            "@id": "https://www.softwareimprovementgroup.com/publications/ebook-building-maintainable-software/#primaryimage",
+            "url": "https://www.softwareimprovementgroup.com/wp-content/uploads/2023/05/Building-Maintainable-Software-mockup.png",
+            "contentUrl": "https://www.softwareimprovementgroup.com/wp-content/uploads/2023/05/Building-Maintainable-Software-mockup.png",
+            "width": 1000,
+            "height": 667,
+            "caption": "Some copies of the book \"Building Maintainable Software\" piled up."
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.softwareimprovementgroup.com/#website",
+            "url": "https://www.softwareimprovementgroup.com/",
+            "name": "SIG",
+            "description": "Identify. Act. Thrive",
+            "publisher": {
+              "@id": "https://www.softwareimprovementgroup.com/#organization"
+            },
+            "potentialAction": [
+              {
+                "@type": "SearchAction",
+                "target": {
+                  "@type": "EntryPoint",
+                  "urlTemplate": "https://www.softwareimprovementgroup.com/?s={search_term_string}"
+                },
+                "query-input": {
+                  "@type": "PropertyValueSpecification",
+                  "valueRequired": true,
+                  "valueName": "search_term_string"
+                }
+              }
+            ],
+            "inLanguage": "en-US"
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://www.softwareimprovementgroup.com/#organization",
+            "name": "SIG",
+            "url": "https://www.softwareimprovementgroup.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "inLanguage": "en-US",
+              "@id": "https://www.softwareimprovementgroup.com/#/schema/logo/image/",
+              "url": "https://www.softwareimprovementgroup.com/wp-content/uploads/logo-1.png",
+              "contentUrl": "https://www.softwareimprovementgroup.com/wp-content/uploads/logo-1.png",
+              "width": 51,
+              "height": 34,
+              "caption": "SIG"
+            },
+            "image": {
+              "@id": "https://www.softwareimprovementgroup.com/#/schema/logo/image/"
+            },
+            "sameAs": [
+              "https://www.linkedin.com/company/software-improvement-group"
+            ]
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "date": "Wed, 13 Nov 2024 03:59:04 GMT",
+      "server": "Apache/2.4.58 (Ubuntu)",
+      "strict-transport-security": "max-age=63072000",
+      "upgrade": "h2",
+      "connection": "Upgrade, Keep-Alive",
+      "access-control-allow-origin": "*",
+      "link": "<https://www.softwareimprovementgroup.com/wp-json/>; rel=\"https://api.w.org/\", <https://www.softwareimprovementgroup.com/wp-json/wp/v2/publications/2162>; rel=\"alternate\"; title=\"JSON\"; type=\"application/json\", <https://www.softwareimprovementgroup.com/?p=2162>; rel=shortlink",
+      "vary": "Accept-Encoding",
+      "content-encoding": "gzip",
+      "content-length": "30110",
+      "keep-alive": "timeout=5, max=100",
+      "content-type": "text/html; charset=UTF-8"
+    }
+  },
+  "screenshotUrl": null,
+  "text": "Building Maintainable Software - SIG\nThese guidelines have been derived from analyzing hundreds of real-world systems.\nWritten by consultants from the Software Improvement Group (SIG), this book provides clear and concise explanations, with advice for turning the guidelines into practice. Examples for this edition are written in Java, while our companion C# book provides workable examples in that language.",
+  "markdown": "# Building Maintainable Software - SIG\n\nThese guidelines have been derived from analyzing hundreds of real-world systems.\n\nWritten by consultants from the Software Improvement Group (SIG), this book provides clear and concise explanations, with advice for turning the guidelines into practice. Examples for this edition are written in Java, while our companion C# book provides workable examples in that language.",
+  "debug": {
+    "requestHandlerMode": "browser"
+  }
+}]

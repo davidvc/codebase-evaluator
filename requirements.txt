@@ -1,0 +1,4 @@
+chromadb==0.4.22
+langgraph==0.0.15
+langchain==0.1.5
+GitPython==3.1.41
