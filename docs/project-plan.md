@@ -149,28 +149,20 @@ def create_analysis_workflow():
 [x] Create basic repository indexer
 [x] Create basic workflow system
 [x] Create basic report generation
-
-[ ] Implement Parallel Analysis Pipeline
-    [ ] Create state management system
-    [ ] Implement parallel analysis nodes
-    [ ] Add rate limit handling
-    [ ] Create caching system
-
-[ ] Enhance Analysis Capabilities
-    [ ] Improve code parsing
-    [ ] Add relationship tracking
-    [ ] Implement quality metrics
-    [ ] Add progress tracking
-
-[ ] Create Report Generation
-    [ ] Overview report with diagrams
-    [ ] Detailed assessment report
-    [ ] Recommendations
-
-[ ] Add Chat UI
-    [ ] Basic Streamlit interface
-    [ ] Query cached insights
-    [ ] Interactive exploration
+[ ] Implement parallel analysis nodes
+[ ] Create state management system
+[ ] Add rate limit handling
+[ ] Create caching system
+[ ] Improve code parsing
+[ ] Add relationship tracking
+[ ] Implement quality metrics
+[ ] Add progress tracking
+[ ] Create overview report with diagrams
+[ ] Create detailed assessment report
+[ ] Add recommendations generation
+[ ] Implement basic Streamlit interface
+[ ] Add query system for cached insights
+[ ] Create interactive exploration UI
 
 ## Benefits of This Design
 1. Efficient use of API calls through parallelization
