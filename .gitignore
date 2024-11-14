@@ -48,3 +48,6 @@ Thumbs.db
 
 # Reports output
 reports/
+
+# Custom model configuration
+src/custom_model_config.json
