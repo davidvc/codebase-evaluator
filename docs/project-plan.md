@@ -68,7 +68,7 @@ The system expects standard Maven project layout:
 - [x] Implement Maven structure analyzer
 - [x] Implement directory-based component discovery
 - [x] Create basic component analysis
-- [ ] Write functional test using a real LLM and a real repository (dewey codegen)
+- [ ] Write integration test using a real LLM and a real repository (dewey codegen)
 
 ## Current Status
 

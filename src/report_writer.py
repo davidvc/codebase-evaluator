@@ -30,11 +30,7 @@ def save_report(state: AnalysisState) -> dict:
         f.write(f"Repository: {state['repo_url']}\n")
         f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
         f.write("---\n\n")
-        f.write(state["report"])
+        report_content = state.get("report") or "No analysis results available."
+        f.write(report_content)
     
-    return {
-        "messages": list(state["messages"]) + [f"Report saved to {filepath}"],
-        "report": state["report"],
-        "db": state["db"],
-        "repo_url": state["repo_url"]
-    }
+    return {**state, "messages": state["messages"] + [f"Report saved to {filepath}"]}

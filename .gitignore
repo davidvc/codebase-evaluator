@@ -51,3 +51,6 @@ reports/
 
 # Custom model configuration
 src/custom_model_config.json
+
+# Test artifacts
+reports/
