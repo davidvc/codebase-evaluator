@@ -1,172 +1,99 @@
-# Project Plan: Codebase Evaluator System
+# Project Plan: Java Codebase Evaluator System
 
-## LangGraph Workflow Design
+## Scope Definition
 
-### Parallel Analysis Pipeline
+This system specifically targets Java codebases using Maven project structure:
 
-Using LangGraph to implement a multi-step workflow with parallel execution where possible:
+- Standard Maven directory layout (src/main/java, src/test/java, etc.)
+- Java source files and Maven configuration (pom.xml)
+- Directory-based component identification
+- Basic Java best practices
 
-```mermaid
-graph TD
-    A[Repository Indexing] --> B[Structure Analysis]
-    A --> C[Component Discovery]
+Future versions may expand to support other languages and build systems.
 
-    B --> D[Component Analysis]
-    C --> D
+## Analysis Pipeline
 
-    subgraph "Parallel Component Analysis"
-        D --> D1[Analyze Component 1]
-        D --> D2[Analyze Component 2]
-        D --> D3[Analyze Component N]
-    end
+The system will use a focused workflow for Java/Maven projects:
 
-    D1 & D2 & D3 --> E[Integration Analysis]
+1. Repository Indexing
 
-    E --> F[Quality Assessment]
+   - Clone and index the repository
+   - Create searchable database of code content
 
-    subgraph "Parallel Quality Checks"
-        F --> F1[Load Analysis Prompts]
-        F1 --> F2[Run Configured Analyses]
-    end
+2. Maven Structure Analysis
 
-    F2 --> G[Report Generation]
-```
+   - Validate Maven directory layout
+   - Parse POM file
+   - Verify required directories exist
 
-### Configurable Analysis System
+3. Directory-Based Component Discovery
 
-The system uses configuration over code to define what to analyze and how to analyze it. This allows for:
+   - Map components based on directory structure
+   - Identify source components (under src/main/java)
+   - Identify test components (under src/test/java)
 
-1. Flexible Analysis Definition
+4. Component Analysis
 
-   - Analysis criteria defined in configuration files
-   - Easy to add, remove, or modify analysis types
-   - No code changes needed to update analysis criteria
+   - Analyze source components
+   - Analyze test components
+   - Map dependencies between components
 
-2. Configurable Components
+5. Quality Assessment
 
-   - Evaluation criteria
-   - Analysis prompts
+   - Basic Java coding standards
+   - Maven best practices
+   - Directory organization
+   - Dependency management
 
-3. Benefits
-   - Easy customization per project
-   - Reusable analysis patterns
-   - Consistent evaluation approach
-   - Simple maintenance and updates
+6. Report Generation
+   - Project structure overview
+   - Component organization
+   - Quality metrics
+   - Recommendations
 
-### Workflow Implementation
+## Expected Project Structure
 
-#### 1. State Management
+The system expects standard Maven project layout:
 
-```python
-class AnalysisState(TypedDict):
-    repo_url: str
-    db: Any  # ChromaDB instance
-    structure_analysis: dict
-    component_map: dict
-    component_analyses: dict
-    integration_analysis: dict
-    quality_assessments: dict
-    reports: dict
-    cache: dict
-    messages: List[str]
-    prompt_configs: Dict[str, Any]
-```
-
-#### 2. Parallel Execution Nodes
-
-1. Initial Analysis (parallel):
-
-   ```python
-   @node
-   def analyze_structure(state: AnalysisState) -> dict:
-       """Analyze project structure, directories, files"""
-
-   @node
-   def discover_components(state: AnalysisState) -> dict:
-       """Identify key components and relationships"""
-   ```
-
-2. Component Analysis (parallel per component):
-   ```python
-   @node
-   def analyze_component(state: AnalysisState, component_id: str) -> dict:
-       """Deep analysis of single component"""
-   ```
-
-#### 3. Sequential Nodes
-
-```python
-@node
-def analyze_integration(state: AnalysisState) -> dict:
-    """Analyze component interactions"""
-
-@node
-def generate_reports(state: AnalysisState) -> dict:
-    """Generate final reports"""
-```
-
-### Rate Limit Management
-
-- Implement token bucket rate limiting
-- Track API usage per parallel branch
-- Add backoff when limits approached
-- Cache results to minimize API calls
-
-### Caching Strategy
-
-1. Persistent Cache:
-   - Project structure
-   - Component definitions
-   - Analysis results
-   - Analysis prompt results
-2. Memory Cache:
-   - Intermediate results
-   - Partial analyses
-   - Cross-references
+- pom.xml at root
+- src/main/java for source code
+- src/test/java for test code
+- src/main/resources and src/test/resources for resources
 
 ## Execution Steps
 
 - [x] Create basic repository indexer
 - [x] Create basic workflow system
 - [x] Create basic report generation
-- [x] Create dynamic analysis execution
-- [x] Implement parallel analysis execution
-- [x] Create state management system
-- [ ] Add rate limit handling
-- [ ] Create caching system
-- [ ] Improve code parsing
-- [ ] Add relationship tracking
-- [ ] Implement quality metrics
-- [ ] Create overview report with diagrams
-- [ ] Create detailed assessment report
-- [ ] Add recommendations generation
-- [ ] Implement basic Streamlit interface
-- [ ] Add query system for cached insights
-- [ ] Create interactive exploration UI
+- [ ] Implement Maven structure analyzer
+- [ ] Implement directory-based component discovery
+- [ ] Create basic component analysis
+- [ ] Add POM file parser
+- [ ] Implement basic quality metrics
+- [ ] Generate Maven-focused reports
 
 ## Current Status
 
-The project has successfully implemented dynamic and parallel analysis execution. The task functions have been modularized into separate files for better organization. The custom model integration for LLM tasks is complete. However, the task functions are currently stubs and need to be implemented.
+The project has the basic workflow infrastructure in place. We now need to implement the Java/Maven-specific analysis functionality, starting with the Maven structure analyzer.
 
 ## Next Steps
 
-1. Implement the logic for each task function (`analyze_structure`, `discover_components`, `analyze_integration`).
-2. Update the tests to verify that the analysis is working as expected.
-3. Add rate limit handling to manage API usage effectively.
-4. Implement a caching system to store analysis results and minimize redundant computations.
-5. Improve code parsing to enhance the accuracy and depth of analysis.
-6. Add relationship tracking to understand component interactions better.
-7. Implement quality metrics to evaluate the codebase against best practices.
+1. Implement Maven structure analysis to validate project layout
+2. Create POM file parser to understand project configuration
+3. Implement directory-based component discovery
+4. Update tests to verify Maven/Java analysis
+5. Add basic quality metrics
+6. Create dependency analysis
 
-## Benefits of This Design
+## Benefits of Simplified Approach
 
-1. Efficient use of API calls through parallelization
-2. Better handling of large codebases
-3. Granular progress tracking
-4. Reusable cached insights
-5. Scalable to different project sizes
-6. Configurable analysis criteria
-7. Easy to add/remove analysis principles
-8. Maintainable through configuration over code
-9. Flexible prompt customization
-10. Project-specific analysis tuning
+1. Clear directory-based component identification
+2. Standard Maven structure validation
+3. Simple test identification (based on directory)
+4. Basic dependency management
+5. Straightforward package organization
+6. Easy to understand and maintain
+7. Clear separation of concerns
+8. Reliable component boundaries
+9. Simple upgrade path
+10. Focus on essential metrics
